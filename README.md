@@ -89,11 +89,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(MyComponent)
   - แยก Reducer ตาม Routing ของ Navigation
   - ActionType ควรตั้งชื่อในรูปแบบ UPPERCASE (ตัวอักษรพิมพ์ใหญ่ทั้งหมด) และตั้งชื่อให้สัมพันธ์กับ Reducer
   - ถ้าจะส่งค่าเข้า reducer ให้ dispash ค่ามากับ payload ไม่ควรเก็บค่าไว้ใน Reducer
+	- ให้แยกค่า intitialState ไว้ในแต่ละ reducer 
     
 ```javascript
 // รูปแบบการเขียน Reducer
 const setHeader = function(state = '', action) {
-	let { title, desc, type } = action //ย่อรูปออปเจ็ค
+	let { type, title, desc } = action //ย่อรูปออปเจ็ค
 		switch(type) {
 		case 'HEADER_TITLE':
 		    return title

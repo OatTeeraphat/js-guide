@@ -39,11 +39,11 @@ class MyComponent extends React.Component {
 	render() {
 		return (
 		       <View>
-			<MySubComponent  
-			    a={...props} //จาก mapStateToProps ไปใช้ ควรเลือกเฉพาะ props ที่คอมโพเน้นท์ลูกต้องการเท่านั้น
-			    b={...state} //จาก initial State ไปใช้ ควรเลือกเฉพาะ props ที่คอมโพเน้นท์ลูกต้องการเท่านั้น
-			    c={this._testFunction} //props ฟังก์ชั่นไปใช้
-			/>
+              <MySubComponent  
+                  a={...props} //จาก mapStateToProps ไปใช้ ควรเลือกเฉพาะ props ที่คอมโพเน้นท์ลูกต้องการเท่านั้น
+                  b={...state} //จาก initial State ไปใช้ ควรเลือกเฉพาะ props ที่คอมโพเน้นท์ลูกต้องการเท่านั้น
+                  c={this._testFunction} //props ฟังก์ชั่นไปใช้
+              />
 		       </View>
 		       )
 	}

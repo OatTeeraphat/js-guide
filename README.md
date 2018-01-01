@@ -21,49 +21,49 @@
   - *การใช้ Container Component ให้พึงคิดเสมอว่า จะทำให้ แอพฯเรนเดอร์ หนึ่งครั้ง เพราะฉะนั้นถ้า ไม่ควรใช้ Container Component ใน Routing ที่ซ้ำกัน จะทำให้เกิดการ เรนเดอร์ที่ซ้ำซ้อน หรือเกิดการกระพริบได้*
 
 ```javascript
-    // Container Component
-    class MyComponent extends React.Component {
-    
-      state = {
+// Container Component
+class MyComponent extends React.Component {
+
+	state = {
 	      //..
-      }
-      
-      componentDidMount() {
+	}
+
+	componentDidMount() {
 	      //..
-      }
-      
-      _testFunction = () => {
+	}
+
+	_testFunction = () => {
 	      //..
-      }
-      
-      render() {
-        return (
-               <View>
-                <MySubComponent  
-                    a={...props} //จาก mapStateToProps ไปใช้ ควรเลือกเฉพาะ props ที่คอมโพเน้นท์ลูกต้องการเท่านั้น
-                    b={...state} //จาก initial State ไปใช้ ควรเลือกเฉพาะ props ที่คอมโพเน้นท์ลูกต้องการเท่านั้น
-                    c={this._testFunction} //props ฟังก์ชั่นไปใช้
-                />
-               </View>
-               )
-      }
-      
-    }
-   
-     //react-redux
-     const mapDispatchToProps = dispatch => {
-        return {
-           //..
-        }
-      }
-      
-     const mapStateToProps = state => {
-        return {
-           //..
-        }
-      }
-	
-	export default connect(mapStateToProps, mapDispatchToProps)(MyComponent)
+	}
+
+	render() {
+		return (
+		       <View>
+			<MySubComponent  
+			    a={...props} //จาก mapStateToProps ไปใช้ ควรเลือกเฉพาะ props ที่คอมโพเน้นท์ลูกต้องการเท่านั้น
+			    b={...state} //จาก initial State ไปใช้ ควรเลือกเฉพาะ props ที่คอมโพเน้นท์ลูกต้องการเท่านั้น
+			    c={this._testFunction} //props ฟังก์ชั่นไปใช้
+			/>
+		       </View>
+		       )
+	}
+
+}
+
+	//react-redux
+	const mapDispatchToProps = dispatch => {
+		return {
+		   //..
+		}
+	}
+
+	const mapStateToProps = state => {
+		return {
+		   //..
+		}
+	}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MyComponent)
 ```
 
  - การใช้ `ฟังก์ชั่น, Props หรือ State` ใน Presentation Component ให้ส่ง props มาจาก Container Component
@@ -91,33 +91,33 @@
   - ถ้าจะส่งค่าเข้า reducer ให้ dispash ค่ามากับ payload ไม่ควรเก็บค่าไว้ใน Reducer
     
 ```javascript
-    // รูปแบบการเขียน Reducer
-    const setHeader = function(state = '', action) {
-      let { title, desc, type } = action //ย่อรูปออปเจ็ค
-        switch(type) {
-        case 'HEADER_TITLE':
-          return title
-        case 'HEADER_DESC':
-          return desc
-        defult : 
-          return state
-     }
-     
-     //รูปแบบการเรียกใช้ reducer
-     const mapDispatchToProps = dispatch => {
-        return {
-          setHeaderMenubar: () => dispatch({ type: 'HEADER_TITLE', title: "หน้าหลัก" }),
-          setHeaderMenubarDesc: () => dispatch({ type: 'HEADER_DESC', desc: "สาขา สยามสแคร์วัน" }),
-        }
-      }
-     
-     //รูปแบบการเรียกใช้ State จาก Redux
-     const mapStateToProps = state => {
-          return {
-            headerTitle : state.title,
-            headerDesc  : state.desc
-          }
-      }
+// รูปแบบการเขียน Reducer
+const setHeader = function(state = '', action) {
+	let { title, desc, type } = action //ย่อรูปออปเจ็ค
+		switch(type) {
+		case 'HEADER_TITLE':
+		    return title
+		case 'HEADER_DESC':
+		    return desc
+		defult : 
+		    return state
+}
+
+//รูปแบบการเรียกใช้ reducer
+const mapDispatchToProps = dispatch => {
+	return {
+	    setHeaderMenubar: () => dispatch({ type: 'HEADER_TITLE', title: "หน้าหลัก" }),
+	    setHeaderMenubarDesc: () => dispatch({ type: 'HEADER_DESC', desc: "สาขา สยามสแคร์วัน" }),
+	}
+}
+
+//รูปแบบการเรียกใช้ State จาก Redux
+const mapStateToProps = state => {
+	return {
+	headerTitle : state.title,
+	headerDesc  : state.desc
+	}
+}
     
 ```
 **[[⬆ กลับไปด้านบน]](#TOC)**
@@ -132,21 +132,21 @@
   - การตั้งชื่อควรตั้งให้สื่อความหมาย ถึงการกระทำหรือหน้าที่ให้ชัดเจนทุกตัวแปล เป็นฟังก์ชั่นกรุ๊ปไหน ทำหน้าที่อะไร
   
 ```javascript
-    // การตั้งชื่อไฟลล์ และ การตั้งชื่อ Component
-    import OrderGetListTable from './OrderGetListTable' // ควรใช้ PascalCase
-    
-    // การตั้งชื่อ Component
-    class MyComponent extends React.Component // ควรใช้ PascalCase
-    export default const MySubComponent = () => // ควรใช้ PascalCase
+// การตั้งชื่อไฟลล์ และ การตั้งชื่อ Component
+import OrderGetListTable from './OrderGetListTable' // ควรใช้ PascalCase
 
-    // การตั้งชื่อฟังก์ชั่น
-    orderGetListTable = () => // ควรใช้ camelCase
-    
-    // ไม่เหมาะสม
-    fucking = () => //ความหมายผิดเพี้ยน
-    class BtnRed extends React.Component //ความหมายไม่ชัดเจน
-    resServer = () => ... //รับอะไรมาจาก server แก้เป็น getTimeNowFromServer
-    get_Time, Gettime_From_server, _getTime //ยังไม่ต้องใช้ดีกว่า
+// การตั้งชื่อ Component
+class MyComponent extends React.Component // ควรใช้ PascalCase
+export default const MySubComponent = () => // ควรใช้ PascalCase
+
+// การตั้งชื่อฟังก์ชั่น
+orderGetListTable = () => // ควรใช้ camelCase
+
+// ไม่เหมาะสม
+fucking = () => //ความหมายผิดเพี้ยน
+class BtnRed extends React.Component //ความหมายไม่ชัดเจน
+resServer = () => ... //รับอะไรมาจาก server แก้เป็น getTimeNowFromServer
+get_Time, Gettime_From_server, _getTime //ยังไม่ต้องใช้ดีกว่า
 ```
 **[[⬆ กลับไปด้านบน]](#TOC)**
 
@@ -158,43 +158,43 @@
   - console.log ใช้งานเสร็จแล้ว ลบหรือ คอมเม้นด้วย
   
 ```javascript
-    // รูปแบบ arrow ฟังก์ชั่น
-    myFunctionsAwsome = () => {
-      //..
-    }
-    
-    // ควรสร้างฟังก์ชั่นที่ทำได้แค่ Job เดียว เพื่อให้ฟังก์ชั่นหลักใช้งาน ใช้ซ้ำ และง่ายต่อการทำ Testing
-    
-    /*
-     * no returns value
-     * check user sesstion conditions
-     * กรณีคอมเม้นหลายบรรทัด ให้ใช้ * บรรทัดเดียวใช้ //
-     */
-     
-    signIn = asyn() => {
-      if (this.checkSesstion() == null){
-        // create new sesstion
-        await this.getUserByUserName(id)
-        await this.createSesstion(userById)
-      } else if (this.checkUserExpire() < 90){
-        // login sucessfuly
-        this.props.goToHomePage()
-      } else {
-        // expire sesstion
-        this.removeSesstion()
-      }
-    }
-    createSesstion = (userById) => {}
-    checkSesstion = () => {}
-    removeSesstion = () => {}
-    checkUserExpire = () => {}
-    getUserByUserName = (id) => {}
-    getTimeNowFromServer = () => {}
-    
-    // หลีกเลี่ยงการใช้งานการวนลูป array   
-    this.props.tableList.filter(x => x.number === 0 ) //filter หา
-    this.state.tableList.map((data) => { ... }) //loop ข้อมูล
-    
+// รูปแบบ arrow ฟังก์ชั่น
+myFunctionsAwsome = () => {
+	//..
+}
+
+// ควรสร้างฟังก์ชั่นที่ทำได้แค่ Job เดียว เพื่อให้ฟังก์ชั่นหลักใช้งาน ใช้ซ้ำ และง่ายต่อการทำ Testing
+
+/*
+* no returns value
+* check user sesstion conditions
+* กรณีคอมเม้นหลายบรรทัด ให้ใช้ * บรรทัดเดียวใช้ //
+*/
+
+signIn = asyn() => {
+if (this.checkSesstion() == null){
+	// create new sesstion
+	await this.getUserByUserName(id)
+	await this.createSesstion(userById)
+} else if (this.checkUserExpire() < 90){
+	// login sucessfuly
+	this.props.goToHomePage()
+} else {
+	// expire sesstion
+	this.removeSesstion()
+	}
+}
+createSesstion = (userById) => {}
+checkSesstion = () => {}
+removeSesstion = () => {}
+checkUserExpire = () => {}
+getUserByUserName = (id) => {}
+getTimeNowFromServer = () => {}
+
+// หลีกเลี่ยงการใช้งานการวนลูป array   
+this.props.tableList.filter(x => x.number === 0 ) //filter หา
+this.state.tableList.map((data) => { ... }) //loop ข้อมูล
+
 ```
 **[[⬆ กลับไปด้านบน]](#TOC)**
 
